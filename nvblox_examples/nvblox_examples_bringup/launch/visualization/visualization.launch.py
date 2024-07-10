@@ -28,7 +28,7 @@ def generate_launch_description() -> LaunchDescription:
         False,
         description='Whether to run the foxglove bridge for visualization in foxglove.',
         cli=True)
-    args.add_arg('run_rviz', True, description='Whether to run rviz2.', cli=True)
+    args.add_arg('run_rviz', False, description='Whether to run rviz2.', cli=True)
     args.add_arg('mode', NvbloxMode.static)
     args.add_arg('camera', NvbloxCamera.realsense)
     actions = args.get_launch_actions()
