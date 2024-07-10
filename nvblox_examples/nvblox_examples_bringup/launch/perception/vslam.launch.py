@@ -30,21 +30,22 @@ def add_vslam(args: lu.ArgumentContainer) -> List[Action]:
         ('visual_slam/camera_info_0', '/camera/infra1/camera_info'),
         ('visual_slam/camera_info_1', '/camera/infra2/camera_info'),
         ('visual_slam/image_0', '/camera/realsense_splitter_node/output/infra_1'),
-        ('visual_slam/image_1', '/camera/realsense_splitter_node/output/infra_2')
+        ('visual_slam/image_1', '/camera/realsense_splitter_node/output/infra_2'),
+        ('visual_slam/imu', 'camera/imu')
     ]
 
     base_parameters = {
         'num_cameras': 2,
         'min_num_images': 2,
-        'enable_localization_n_mapping': False,
-        'enable_imu_fusion': False,
+        'enable_localization_n_mapping': True,
+        'enable_imu_fusion': True,
         'gyro_noise_density': 0.000244,
         'gyro_random_walk': 0.000019393,
         'accel_noise_density': 0.001862,
         'accel_random_walk': 0.003,
         'calibration_frequency': 200.0,
-        'rig_frame': 'base_link',
-        'imu_frame': 'front_stereo_camera_imu',
+        'rig_frame': 'base_footprint',
+        'imu_frame': 'camera_imu_optical_frame',
         'enable_slam_visualization': True,
         'enable_landmarks_view': True,
         'enable_observations_view': True,
@@ -54,13 +55,18 @@ def add_vslam(args: lu.ArgumentContainer) -> List[Action]:
         'debug_dump_path': '/tmp/cuvslam',
         'map_frame': 'map',
         'odom_frame': 'odom',
-        'base_frame': 'base_link',
+        'base_frame': 'base_footprint',
+        'enable_ground_constraint_in_odometry': True,
+        'enable_ground_constraint_in_slam': True,
+        'publish_map_to_odom_tf': False,
+        'publish_odom_to_base_tf': False,
+
     }
     realsense_parameters = {
         'enable_rectified_pose': True,
         'enable_image_denoising': False,
         'rectified_images': True,
-        'base_frame': 'camera_link',
+        'base_frame': 'base_footprint',
         'camera_optical_frames': [
             'camera_infra1_optical_frame',
             'camera_infra2_optical_frame',
@@ -99,7 +105,7 @@ def generate_launch_description() -> LaunchDescription:
     args.add_arg('camera')
     args.add_arg(
         'enable_ground_constraint_in_odometry',
-        'False',
+        'True',
         description='Whether to constraint robot movement to a 2d plane (e.g. for AMRs).',
         cli=True)
     args.add_arg('container_name', NVBLOX_CONTAINER_NAME)
