@@ -44,6 +44,11 @@ def generate_launch_description() -> LaunchDescription:
         ],
         description='The  model type of PeopleSemSegNet (only used when mode:=people).',
         cli=True)
+    args.add_arg(
+        'visualization', 'false',
+        description='Enable or disable visualization.',
+        choices=['true', 'false'],
+        cli=True)
     actions = args.get_launch_actions()
 
     # Globally set use_sim_time if we're running from bag or sim
@@ -110,8 +115,10 @@ def generate_launch_description() -> LaunchDescription:
             'launch/visualization/visualization.launch.py',
             launch_arguments={
                 'mode': args.mode,
-                'camera': NvbloxCamera.realsense
-            }))
+                'camera': NvbloxCamera.realsense,
+                'run_foxglove': 'true'
+            },
+            condition=IfCondition(lu.is_true(args.visualization))))
 
     # Container
     actions.append(lu.component_container(NVBLOX_CONTAINER_NAME, log_level=args.log_level))
