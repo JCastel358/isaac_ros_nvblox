@@ -32,6 +32,19 @@ def generate_launch_description() -> LaunchDescription:
                 'send_buffer_limit': args.send_buffer_limit,
                 'max_qos_depth': 1,
             }],
-        ))
+            remappings=[
+                ('/robot_description', '/robot_description'),
+                ('/tf', '/tf'),
+                ('/tf_static', '/tf_static'),
+                ('/scan', '/scan'),
+                ('/map', '/map'),
+                ('/map_updates', '/map_updates'),
+                ('/initialpose', '/initialpose'),
+                ('/goal_pose', '/goal_pose'),
+                ('/clicked_point', '/clicked_point'),
+            ],
+            output='screen'
+        )
+    )
 
     return LaunchDescription(actions)
