@@ -28,7 +28,7 @@ def generate_launch_description() -> LaunchDescription:
     args.add_arg(
         'rosbag', 'None', description='Path to rosbag (running on sensor if not set).', cli=True)
     args.add_arg('rosbag_args', '', description='Additional args for ros2 bag play.', cli=True)
-    args.add_arg('log_level', 'info', choices=['debug', 'info', 'warn'], cli=True)
+    args.add_arg('log_level', 'debug', choices=['debug', 'info', 'warn'], cli=True)
     args.add_arg(
         'mode',
         default=NvbloxMode.static,
