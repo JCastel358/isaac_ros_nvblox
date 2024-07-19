@@ -43,7 +43,7 @@ def generate_launch_description() -> LaunchDescription:
                 ('/goal_pose', '/goal_pose'),
                 ('/clicked_point', '/clicked_point'),
             ],
-            output='log'
+            output='screen'
         )
     )
 
