@@ -65,17 +65,17 @@ def generate_launch_description() -> LaunchDescription:
             condition=UnlessCondition(lu.is_valid(args.rosbag))))
 
     # Visual SLAM
-    actions.append(
-        lu.include(
-            'nvblox_examples_bringup',
-            'launch/perception/vslam.launch.py',
-            launch_arguments={
-                'container_name': NVBLOX_CONTAINER_NAME,
-                'camera': NvbloxCamera.realsense,
-            },
-            # Delay for 1 second to make sure that the static topics from the rosbag are published.
-            delay=1.0,
-            ))
+    # actions.append(
+    #     lu.include(
+    #         'nvblox_examples_bringup',
+    #         'launch/perception/vslam.launch.py',
+    #         launch_arguments={
+    #             'container_name': NVBLOX_CONTAINER_NAME,
+    #             'camera': NvbloxCamera.realsense,
+    #         },
+    #         # Delay for 1 second to make sure that the static topics from the rosbag are published.
+    #         delay=1.0,
+    #         ))
 
     # People segmentation
     actions.append(
