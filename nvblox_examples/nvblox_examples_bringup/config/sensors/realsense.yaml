@@ -42,7 +42,7 @@ enable_infra1: true
 enable_infra2: true
 # accel_fps: 200
 # gyro_fps: 200
-unite_imu_method: 2
+# unite_imu_method: 2
 
 pointcloud:
   enable: false
