@@ -55,12 +55,16 @@ def add_vslam(args: lu.ArgumentContainer) -> List[Action]:
         'map_frame': 'map',
         'odom_frame': 'odom',
         'base_frame': 'base_link',
+        'enable_ground_constraint_in_odometry': True,
+        'enable_ground_constraint_in_slam': True,
+        'publish_map_to_odom_tf': False,
+        'publish_odom_to_base_tf': False,
     }
     realsense_parameters = {
         'enable_rectified_pose': True,
         'enable_image_denoising': False,
         'rectified_images': True,
-        'base_frame': 'camera_link',
+        'base_frame': 'base_link',
         'camera_optical_frames': [
             'camera_infra1_optical_frame',
             'camera_infra2_optical_frame',
@@ -99,7 +103,7 @@ def generate_launch_description() -> LaunchDescription:
     args.add_arg('camera')
     args.add_arg(
         'enable_ground_constraint_in_odometry',
-        'False',
+        'True',
         description='Whether to constraint robot movement to a 2d plane (e.g. for AMRs).',
         cli=True)
     args.add_arg('container_name', NVBLOX_CONTAINER_NAME)

@@ -5,7 +5,7 @@
     # QoS settings
     input_qos: "SENSOR_DATA"
     # Map clearing settings
-    map_clearing_frame_id: "camera_link"
+    map_clearing_frame_id: "base_footprint"
     # Rviz visualization
     slice_visualization_attachment_frame_id: "camera_link"
 
